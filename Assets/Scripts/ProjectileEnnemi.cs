@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class ProjectileEnnemi : MonoBehaviour
+{   
+    public GameObject cible;
+    public Rigidbody2D rb;
+    public Vector2 launchDir;
+    public Vector2 launchDirNorm;
+    public float speed;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created 
+    void Start()
+    {
+        cible = GameObject.Find("Player");
+        rb = GetComponent<Rigidbody2D>();
+        launchDir = cible.transform.position - this.gameObject.transform.position;
+        launchDirNorm = launchDir.normalized;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        rb.linearVelocity = launchDirNorm * speed;
+    }
+}
