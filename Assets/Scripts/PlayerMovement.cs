@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed;
     public float basePlayerSpeed;
     public float direction;
-    public float sprintSpeed = 1.5f;
+    public float sprintSpeed = 2f;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     // public Animator playerAnimator;

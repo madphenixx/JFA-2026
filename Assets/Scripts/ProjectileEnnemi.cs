@@ -13,7 +13,7 @@ public class ProjectileEnnemi : MonoBehaviour
     {
         cible = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
-        launchDir = cible.transform.position - this.gameObject.transform.position;
+        launchDir = cible.transform.position - gameObject.transform.position;
         launchDirNorm = launchDir.normalized;
     }
 

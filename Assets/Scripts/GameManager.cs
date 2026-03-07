@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        pvSlider=GameObject.Find("PV").GetComponent<Slider>();
+        pvSlider=GameObject.Find("PVPlayer").GetComponent<Slider>();
         scoreText=GameObject.Find("Score").GetComponent<Text>();
         comboText=GameObject.Find("Combo").GetComponent<Text>();
         pv=10;

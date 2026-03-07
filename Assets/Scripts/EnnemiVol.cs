@@ -1,25 +1,23 @@
 using UnityEngine;
-using NUnit.Framework;
 using System.Collections;
-using System.Collections.Generic;
 
 public class EnnemiVol : MonoBehaviour
 {
     public GameObject projectile;
     public float speed;
     public Vector2 SpawnPos;
-    public int pv;
+    public GameObject barreVie;
 
     void Start()
     {
-        pv=10;
         StartCoroutine(LauchBlocksWait());
+        barreVie = gameObject.transform.GetChild(0).GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // barreVie.GetComponent<RectTransform>().anchoredPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+20,0);
     }
 
     public IEnumerator LauchBlocksWait()
