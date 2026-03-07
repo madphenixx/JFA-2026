@@ -8,9 +8,11 @@ public class EnnemiVol : MonoBehaviour
     public GameObject projectile;
     public float speed;
     public Vector2 SpawnPos;
+    public int pv;
 
     void Start()
     {
+        pv=10;
         StartCoroutine(LauchBlocksWait());
     }
 
@@ -25,7 +27,7 @@ public class EnnemiVol : MonoBehaviour
         while (true)
             {
                 yield return new WaitForSeconds(3.5f);
-                SpawnPos = new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+                SpawnPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
                 Instantiate(projectile, SpawnPos, Quaternion.identity);
             }
     }

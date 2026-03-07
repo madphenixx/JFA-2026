@@ -20,16 +20,23 @@ public class ProjectileEnnemi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            GameManager.pv=GameManager.pv-1;
+            GameManager.pvSlider.value=GameManager.pv;
+            GameManager.combo=0;
+            GameManager.comboText.text="Combo: "+ GameManager.combo.ToString();
+            GameManager.score=GameManager.score-10;
+            GameManager.scoreText.text="Score: "+ GameManager.score.ToString();
             Destroy(gameObject);
         }
     }
+
 
     void FixedUpdate()
     {
