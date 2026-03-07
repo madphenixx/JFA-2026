@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ProjectilePlayer : MonoBehaviour
 {
-    //En gros faut trouver l'ennemi le plus proche et le viser
     public GameObject cible;
     public Rigidbody2D rb;
     public Vector2 launchDir;
