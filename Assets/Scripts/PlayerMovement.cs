@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,12 +13,15 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed;
     public float basePlayerSpeed;
     public float direction;
-    public float sprintSpeed = 2f;
+    public float sprintSpeed = 4f;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     // public Animator playerAnimator;
     public Transform playerTransform;
     public bool facingRight = true;
+
+    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,11 +49,11 @@ public class PlayerMovement : MonoBehaviour
         MoveRef.action.canceled += Move;
 
         SprintRef.action.started += Sprint;
-        SprintRef.action.performed += Sprint;
+        //SprintRef.action.performed += Sprint;
         SprintRef.action.canceled += Sprint;
 
         DodgeRef.action.started += Dodge;
-        DodgeRef.action.performed += Dodge;
+        //DodgeRef.action.performed += Dodge;
         DodgeRef.action.canceled += Dodge;
     }
 

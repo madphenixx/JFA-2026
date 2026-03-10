@@ -17,7 +17,7 @@ public class EnnemiVol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // barreVie.GetComponent<RectTransform>().anchoredPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+20,0);
+         barreVie.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, gameObject.transform.position.y+2,0);
     }
 
     public IEnumerator LauchBlocksWait()

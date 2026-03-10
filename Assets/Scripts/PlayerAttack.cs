@@ -15,9 +15,8 @@ public class PlayerAttack : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Faut fix le fait que ca cree 2 projectiles qu lieu de rien
         DistanceRef.action.started += DistanceAttack;
-        DistanceRef.action.performed += DistanceAttack;
+        //DistanceRef.action.performed += DistanceAttack;
         DistanceRef.action.canceled += DistanceAttack;
     }
 
