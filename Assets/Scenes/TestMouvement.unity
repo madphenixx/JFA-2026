@@ -1051,6 +1051,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnnemiVol
       objectReference: {fileID: 0}
+    - target: {fileID: 4389352089810341296, guid: 3343e3f05ecc5c2418e7c31232766671, type: 3}
+      propertyPath: spawnTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5912866961101924742, guid: 3343e3f05ecc5c2418e7c31232766671, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1345,7 +1349,8 @@ MonoBehaviour:
   playerSpeed: 350
   basePlayerSpeed: 350
   direction: 0
-  sprintSpeed: 2.5
+  sprintSpeed: 4
+  dodgeSpeed: 8
   spriteRenderer: {fileID: 1564621551}
   rb: {fileID: 1564621549}
   playerTransform: {fileID: 1564621545}

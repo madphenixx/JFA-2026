@@ -7,7 +7,7 @@ public class EnnemiVol : MonoBehaviour
     public float speed;
     public Vector2 SpawnPos;
     public GameObject barreVie;
-    public float spawnTime = 3.5f;
+    public float spawnTime;
 
     void Start()
     {
@@ -25,6 +25,7 @@ public class EnnemiVol : MonoBehaviour
     {
         while (true)
             {
+                spawnTime = Random.Range(Time.deltaTime,1.7f);
                 yield return new WaitForSeconds(spawnTime);
                 SpawnPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
                 Instantiate(projectile, SpawnPos, Quaternion.identity);
