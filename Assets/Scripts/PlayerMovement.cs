@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float basePlayerSpeed;
     public float direction;
     public float sprintSpeed = 4f;
+    public float dodgeSpeed = 8f;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     // public Animator playerAnimator;
@@ -30,6 +31,19 @@ public class PlayerMovement : MonoBehaviour
         // playerAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GetComponent<Transform>();
+
+
+        MoveRef.action.started += Move;
+        MoveRef.action.performed += Move;
+        MoveRef.action.canceled += Move;
+
+        SprintRef.action.started += Sprint;
+        //SprintRef.action.performed += Sprint;
+        SprintRef.action.canceled += Sprint;
+
+        DodgeRef.action.started += Dodge;
+        DodgeRef.action.performed += Dodge;
+        DodgeRef.action.canceled += Dodge;
     }
     private void OnEnable()
     { 
@@ -43,23 +57,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(direction * playerSpeed * Time.deltaTime, rb.linearVelocityY);
-
-        MoveRef.action.started += Move;
-        MoveRef.action.performed += Move;
-        MoveRef.action.canceled += Move;
-
-        SprintRef.action.started += Sprint;
-        //SprintRef.action.performed += Sprint;
-        SprintRef.action.canceled += Sprint;
-
-        DodgeRef.action.started += Dodge;
-        //DodgeRef.action.performed += Dodge;
-        DodgeRef.action.canceled += Dodge;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(playerSpeed);
         if (direction < 0 && facingRight)
             Flip();
         else if (direction > 0 && !facingRight)
@@ -82,33 +85,48 @@ public class PlayerMovement : MonoBehaviour
 
     void Sprint(InputAction.CallbackContext ctx)
     {
-        if (!ctx.canceled)
+        if (ctx.started)
         {
             playerSpeed = playerSpeed * sprintSpeed;
+            StartCoroutine(SprintTime());
             // playerAnimator.SetTrigger("IsRunning");
-        }
-        if (ctx.canceled)
-        {
-            playerSpeed = basePlayerSpeed;
-            // playerAnimator.SetTrigger("StopRunning");
         }
     }
 
     void Dodge(InputAction.CallbackContext ctx)
     {
-        if (!ctx.canceled)
+        if (ctx.started)
         {
-            direction = -1;
-            playerSpeed = playerSpeed * sprintSpeed;
+            playerSpeed = basePlayerSpeed * dodgeSpeed;
+            StartCoroutine(DodgeTime());
             // playerAnimator.SetTrigger("IsRunning");
         }
-        if (ctx.canceled)
-        {
-            direction = ctx.ReadValue<float>();
-            playerSpeed = basePlayerSpeed;
-            // playerAnimator.SetTrigger("StopRunning");
-        }
     }
+
+
+    private IEnumerator DodgeTime()
+    {
+        direction = -1;
+        while(direction < 0)
+        {
+            direction += 5*Time.deltaTime;
+            yield return null;
+        }
+        direction = 0;
+        playerSpeed = basePlayerSpeed;
+    }
+
+    private IEnumerator SprintTime()
+    {
+        float time = -1;
+        while (time < 0)
+        {
+            time += 5 * Time.deltaTime;
+            yield return null;
+        }
+        playerSpeed = basePlayerSpeed;
+    }
+
 
     void Flip()
     {

@@ -10,14 +10,15 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        DistanceRef.action.started += DistanceAttack;
+        //DistanceRef.action.performed += DistanceAttack;
+        DistanceRef.action.canceled += DistanceAttack;
 
     }
 
     void FixedUpdate()
     {
-        DistanceRef.action.started += DistanceAttack;
-        //DistanceRef.action.performed += DistanceAttack;
-        DistanceRef.action.canceled += DistanceAttack;
+        
     }
 
     // Update is called once per frame
