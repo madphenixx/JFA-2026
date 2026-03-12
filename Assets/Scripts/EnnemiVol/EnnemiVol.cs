@@ -4,8 +4,7 @@ using System.Collections;
 public class EnnemiVol : MonoBehaviour
 {
     public GameObject projectile;
-    public float speed;
-    public Vector2 SpawnPos;
+    public Vector2 spawnPos;
     public GameObject barreVie;
     public float spawnTime;
 
@@ -18,17 +17,18 @@ public class EnnemiVol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         barreVie.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, gameObject.transform.position.y+2,0);
+        barreVie.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, gameObject.transform.position.y + 2, 0);
     }
 
     public IEnumerator LauchBlocksWait()
     {
         while (true)
             {
-                spawnTime = Random.Range(Time.deltaTime,1.7f);
+                spawnTime = Random.Range(Time.deltaTime, 1.7f);
                 yield return new WaitForSeconds(spawnTime);
-                SpawnPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-                Instantiate(projectile, SpawnPos, Quaternion.identity);
+                
+                spawnPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+                Instantiate(projectile, spawnPos, Quaternion.identity);
             }
     }
 }

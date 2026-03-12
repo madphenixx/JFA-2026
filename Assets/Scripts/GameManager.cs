@@ -16,15 +16,15 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        pvSlider=GameObject.Find("PVPlayer").GetComponent<Slider>();
-        scoreText=GameObject.Find("Score").GetComponent<Text>();
-        comboText=GameObject.Find("Combo").GetComponent<Text>();
+        pvSlider = GameObject.Find("PVPlayer").GetComponent<Slider>();
+        scoreText = GameObject.Find("Score").GetComponent<Text>();
+        comboText = GameObject.Find("Combo").GetComponent<Text>();
 
         scoreTr = GameObject.Find("Score").transform;
 
-        pv=10;
-        score=0;
-        combo=0;
+        pv = 10;
+        score = 0;
+        combo = 0;
     }
 
     // Update is called once per frame
@@ -34,27 +34,31 @@ public class GameManager : MonoBehaviour
         {
             // Deathscreen et on peut reload la scene à laquelle on était avec le bouton retry
             // Garder le même GameManager pendant toute la partie ??? -> Dontdestroyonload
-            //Faire une variable currentScene pour pouvoir sauvegarder la dernière scène
+            // Faire une variable currentScene pour pouvoir sauvegarder la dernière scène
         }
     }
 
-    public void ShowScoreAdd(float value, bool isPositive)
+    public void ShowScoreAdd(float value, bool isPositive) // Pour afficher le montant ajouté ou enlevé du score
     {
         foreach (Transform child in scoreTr)
         {
-            Text text = child.GetComponent<Text>();
-            if (child.gameObject.activeSelf==false)
+            if (child.gameObject.activeSelf == false)
             {
+                Text text = child.GetComponent<Text>();
+                
                 if (isPositive)
                 {
                     text.text = "+" + value.ToString();
                 }
+
                 else
                 {
                     text.text = "-" + value.ToString();
                 }
+
                 text.gameObject.SetActive(true);
                 StartCoroutine(ScoreTime(text));
+
                break; 
             }
         }

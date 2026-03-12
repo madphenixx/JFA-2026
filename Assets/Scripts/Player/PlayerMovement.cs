@@ -4,12 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public InputActionAsset action;
-    public InputAction Player;
-    public InputActionReference MoveRef;
-    public InputActionReference JumpRef;
-    public InputActionReference SprintRef;
-    public InputActionReference DodgeRef;
+    public InputActionReference moveRef;
+    public InputActionReference sprintRef;
+    public InputActionReference dodgeRef;
     public float playerSpeed;
     public float basePlayerSpeed;
     public float direction;
@@ -33,25 +30,16 @@ public class PlayerMovement : MonoBehaviour
         playerTransform = GetComponent<Transform>();
 
 
-        MoveRef.action.started += Move;
-        MoveRef.action.performed += Move;
-        MoveRef.action.canceled += Move;
+        moveRef.action.started += Move;
+        moveRef.action.performed += Move;
+        moveRef.action.canceled += Move;
 
-        SprintRef.action.started += Sprint;
-        //SprintRef.action.performed += Sprint;
-        SprintRef.action.canceled += Sprint;
+        sprintRef.action.started += Sprint;
+        sprintRef.action.canceled += Sprint;
 
-        DodgeRef.action.started += Dodge;
-        DodgeRef.action.performed += Dodge;
-        DodgeRef.action.canceled += Dodge;
-    }
-    private void OnEnable()
-    { 
-        action.Enable();
-    }
-    private void OnDisable()
-    {
-        action.Disable();
+        dodgeRef.action.started += Dodge;
+        dodgeRef.action.performed += Dodge;
+        dodgeRef.action.canceled += Dodge;
     }
 
     private void FixedUpdate()
@@ -62,11 +50,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(playerSpeed);
         if (direction < 0 && facingRight)
+        {
             Flip();
+        } 
         else if (direction > 0 && !facingRight)
+        {
             Flip();
+        }
     }
 
     void Move(InputAction.CallbackContext ctx)
@@ -99,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerSpeed = basePlayerSpeed * dodgeSpeed;
             StartCoroutine(DodgeTime());
-            // playerAnimator.SetTrigger("IsRunning");
+            // playerAnimator.SetTrigger("IsDodging");
         }
     }
 
@@ -109,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         direction = -1;
         while(direction < 0)
         {
-            direction += 5*Time.deltaTime;
+            direction += 5 * Time.deltaTime;
             yield return null;
         }
         direction = 0;

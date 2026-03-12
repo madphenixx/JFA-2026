@@ -7,7 +7,7 @@ public class ProjectileEnnemi : MonoBehaviour
     public Vector2 launchDir;
     public Vector2 launchDirNorm;
     public float speed;
-    public Animator enemyAnimator;
+    // public Animator enemyAnimator;
     public GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
@@ -15,9 +15,10 @@ public class ProjectileEnnemi : MonoBehaviour
     {
         cible = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         launchDir = cible.transform.position - gameObject.transform.position;
         launchDirNorm = launchDir.normalized;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -30,13 +31,16 @@ public class ProjectileEnnemi : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.pv=GameManager.pv-1;
-            GameManager.pvSlider.value=GameManager.pv;
-            GameManager.combo=0;
-            GameManager.comboText.text="Combo: "+ GameManager.combo.ToString();
-            GameManager.score=GameManager.score-10;
-            GameManager.scoreText.text="Score: "+ GameManager.score.ToString();
-            gameManager.ShowScoreAdd(10,false);
+            GameManager.pv = GameManager.pv - 1;
+            GameManager.pvSlider.value = GameManager.pv;
+
+            GameManager.combo = 0;
+            GameManager.comboText.text = "Combo: " + GameManager.combo.ToString();
+
+            GameManager.score = GameManager.score - 10;
+            GameManager.scoreText.text = "Score: "+ GameManager.score.ToString();
+            gameManager.ShowScoreAdd(10, false);
+
             Destroy(gameObject);
         }
     }

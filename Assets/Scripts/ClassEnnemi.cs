@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ClassEnnemi : MonoBehaviour
 {
-    public int pv=10;
-    public Animator enemyAnimator;
+    public int pv = 10;
+    // public Animator enemyAnimator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,9 +16,10 @@ public class ClassEnnemi : MonoBehaviour
     {
         if (pv <= 0)
         {
-            //On détruit l'objet, ajoute des points au score et acctionne l'animation de mort
+            //On détruit l'objet, ajoute des points au score et actionne l'animation de mort
             GameManager.score = GameManager.score+50;
             //enemyAnimator.SetTrigger("IsDead");
+
             //Faudra aussi faire une coroutine pour attendre la fin de l'animation pour mourir
             Destroy(gameObject);
         }

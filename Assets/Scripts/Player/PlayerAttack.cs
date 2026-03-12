@@ -5,20 +5,14 @@ public class PlayerAttack : MonoBehaviour
 { 
     public GameObject projectile;
     public float speed = 10;
-    public Vector2 SpawnPos;
-    public InputActionReference DistanceRef;
+    public Vector2 spawnPos;
+    public InputActionReference distanceRef;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        DistanceRef.action.started += DistanceAttack;
-        //DistanceRef.action.performed += DistanceAttack;
-        DistanceRef.action.canceled += DistanceAttack;
-
-    }
-
-    void FixedUpdate()
-    {
-        
+        distanceRef.action.started += DistanceAttack;
+        distanceRef.action.canceled += DistanceAttack;
     }
 
     // Update is called once per frame
@@ -31,8 +25,8 @@ public class PlayerAttack : MonoBehaviour
     { 
         if (!ctx.canceled)
         {
-            SpawnPos = new Vector2(gameObject.transform.position.x +1, gameObject.transform.position.y);
-            Instantiate(projectile, SpawnPos, Quaternion.identity);
+            spawnPos = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y);
+            Instantiate(projectile, spawnPos, Quaternion.identity);
         } 
     }
 }
