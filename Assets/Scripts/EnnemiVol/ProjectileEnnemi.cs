@@ -8,6 +8,7 @@ public class ProjectileEnnemi : MonoBehaviour
     public Vector2 launchDirNorm;
     public float speed;
     public Animator enemyAnimator;
+    public GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
     void Start()
@@ -16,6 +17,7 @@ public class ProjectileEnnemi : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         launchDir = cible.transform.position - gameObject.transform.position;
         launchDirNorm = launchDir.normalized;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class ProjectileEnnemi : MonoBehaviour
             GameManager.comboText.text="Combo: "+ GameManager.combo.ToString();
             GameManager.score=GameManager.score-10;
             GameManager.scoreText.text="Score: "+ GameManager.score.ToString();
+            gameManager.ShowScoreAdd(10,false);
             Destroy(gameObject);
         }
     }

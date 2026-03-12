@@ -11,6 +11,7 @@ public class ProjectilePlayer : MonoBehaviour
     public float speed=10;
     public GameObject[] allEnnemies;
     public float distanceMin=1000;
+    public GameManager gameManager;
 
 
     void Awake()
@@ -30,6 +31,7 @@ public class ProjectilePlayer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody2D>();
         launchDir = cible.transform.position - gameObject.transform.position;
         launchDirNorm = launchDir.normalized;
@@ -45,14 +47,19 @@ public class ProjectilePlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ennemi"))
         {
+            //A modifier et équilibrer (multiplicateur de combo)}
+            int produit = 1+(GameManager.combo/5);
+
             Slider slEnnemi= collision.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Slider>();
-            collision.gameObject.GetComponent<ClassEnnemi>().pv=collision.gameObject.GetComponent<ClassEnnemi>().pv-1;
+            collision.gameObject.GetComponent<ClassEnnemi>().pv=collision.gameObject.GetComponent<ClassEnnemi>().pv-produit;
             slEnnemi.value=collision.gameObject.GetComponent<ClassEnnemi>().pv;
             GameManager.combo=GameManager.combo+1;
             GameManager.comboText.text="Combo: "+ GameManager.combo.ToString();
 
-            //A modifier et équilibrer (multiplicateur de combo)}
-            GameManager.score=GameManager.score+10*(1+(GameManager.combo/5));
+            
+
+            GameManager.score=GameManager.score+10*produit;
+            gameManager.ShowScoreAdd(10*produit,true);
             GameManager.scoreText.text="Score: "+ GameManager.score.ToString();
 
             Destroy(gameObject);

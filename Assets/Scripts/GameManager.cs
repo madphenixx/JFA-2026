@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static Text scoreText;
     public static int combo;
     public static Text comboText;
+    public static Transform scoreTr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -17,6 +19,9 @@ public class GameManager : MonoBehaviour
         pvSlider=GameObject.Find("PVPlayer").GetComponent<Slider>();
         scoreText=GameObject.Find("Score").GetComponent<Text>();
         comboText=GameObject.Find("Combo").GetComponent<Text>();
+
+        scoreTr = GameObject.Find("Score").transform;
+
         pv=10;
         score=0;
         combo=0;
@@ -31,5 +36,33 @@ public class GameManager : MonoBehaviour
             // Garder le même GameManager pendant toute la partie ??? -> Dontdestroyonload
             //Faire une variable currentScene pour pouvoir sauvegarder la dernière scène
         }
+    }
+
+    public void ShowScoreAdd(float value, bool isPositive)
+    {
+        foreach (Transform child in scoreTr)
+        {
+            Text text = child.GetComponent<Text>();
+            if (child.gameObject.activeSelf==false)
+            {
+                if (isPositive)
+                {
+                    text.text = "+" + value.ToString();
+                }
+                else
+                {
+                    text.text = "-" + value.ToString();
+                }
+                text.gameObject.SetActive(true);
+                StartCoroutine(ScoreTime(text));
+               break; 
+            }
+        }
+    }
+
+    public IEnumerator ScoreTime(Text text)
+    {
+        yield return new WaitForSeconds(1);
+        text.gameObject.SetActive(false);
     }
 }

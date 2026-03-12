@@ -14,7 +14,7 @@ public class ClassEnnemi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pv == 0)
+        if (pv <= 0)
         {
             //On détruit l'objet, ajoute des points au score et acctionne l'animation de mort
             GameManager.score = GameManager.score+50;
