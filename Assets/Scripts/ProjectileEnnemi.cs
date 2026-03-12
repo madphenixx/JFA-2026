@@ -7,6 +7,7 @@ public class ProjectileEnnemi : MonoBehaviour
     public Vector2 launchDir;
     public Vector2 launchDirNorm;
     public float speed;
+    public Animator enemyAnimator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
     void Start()

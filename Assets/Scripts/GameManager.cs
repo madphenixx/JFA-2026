@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static Text scoreText;
     public static int combo;
     public static Text comboText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
