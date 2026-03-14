@@ -1,14 +1,17 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     public InputActionReference moveRef;
+    public InputActionReference jumpRef;
     public InputActionReference sprintRef;
     public InputActionReference dodgeRef;
     public float playerSpeed;
     public float basePlayerSpeed;
+    public float jumpForce = 10;
     public float direction;
     public float sprintSpeed = 4f;
     public float dodgeSpeed = 8f;
@@ -17,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // public Animator playerAnimator;
     public Transform playerTransform;
     public bool facingRight = true;
+    public bool isGrounded;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,16 +30,17 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GetComponent<Transform>();
 
-
         moveRef.action.started += Move;
         moveRef.action.performed += Move;
         moveRef.action.canceled += Move;
+
+        jumpRef.action.started += Jump;
+        jumpRef.action.canceled += Jump;
 
         sprintRef.action.started += Sprint;
         sprintRef.action.canceled += Sprint;
 
         dodgeRef.action.started += Dodge;
-        dodgeRef.action.performed += Dodge;
         dodgeRef.action.canceled += Dodge;
     }
 
@@ -57,6 +62,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
     void Move(InputAction.CallbackContext ctx)
     {
         if (!ctx.canceled)
@@ -68,6 +81,21 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = 0;
             // playerAnimator.SetTrigger("StopWalking");
+        }
+    }
+
+    public void Jump(InputAction.CallbackContext ctx)
+    {
+        if(!ctx.canceled && isGrounded)
+        {
+            // playerAnimator.SetTrigger("JumpUp");
+            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            isGrounded = false;
+        }
+        else
+        {
+            // playerAnimator.SetTrigger("JumpDown");
+            rb.AddForce(new Vector2(0f, -jumpForce), ForceMode2D.Impulse);
         }
     }
 
@@ -91,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private IEnumerator DodgeTime()
     {
         direction = -1;
@@ -114,7 +141,6 @@ public class PlayerMovement : MonoBehaviour
         }
         playerSpeed = basePlayerSpeed;
     }
-
 
     void Flip()
     {

@@ -43,18 +43,13 @@ public class BoatMovements : MonoBehaviour
 
     void MoveBoat(InputAction.CallbackContext ctx)
     {
-        Debug.Log(ctx.ReadValue<Vector2>());
         if (!ctx.canceled)
         {
             direction = ctx.ReadValue<Vector2>();
-            Debug.Log("dir = " + direction);
-            // playerAnimator.SetTrigger("IsWalking");
         }
         else
         {
-            Debug.Log(ctx.ReadValue<Vector2>());
             direction = new Vector2(0,0);
-            // playerAnimator.SetTrigger("StopWalking");
         }
     }
 
