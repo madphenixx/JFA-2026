@@ -86,17 +86,25 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if(!ctx.canceled && isGrounded)
+        if(ctx.started && isGrounded)
         {
             // playerAnimator.SetTrigger("JumpUp");
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             isGrounded = false;
+            StartCoroutine(JumpTime());
         }
-        else
+    }
+
+    private IEnumerator JumpTime()
+    {
+        rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        float time = -1.5f;
+        while (time < 0)
         {
-            // playerAnimator.SetTrigger("JumpDown");
-            rb.AddForce(new Vector2(0f, -jumpForce), ForceMode2D.Impulse);
+            time += 5 * Time.deltaTime;
+            yield return null;
         }
+        // playerAnimator.SetTrigger("JumpDown");
+        rb.AddForce(new Vector2(0f, -jumpForce), ForceMode2D.Impulse);
     }
 
     void Sprint(InputAction.CallbackContext ctx)
@@ -107,6 +115,17 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(SprintTime());
             // playerAnimator.SetTrigger("IsRunning");
         }
+    }
+
+    private IEnumerator SprintTime()
+    {
+        float time = -1;
+        while (time < 0)
+        {
+            time += 5 * Time.deltaTime;
+            yield return null;
+        }
+        playerSpeed = basePlayerSpeed;
     }
 
     void Dodge(InputAction.CallbackContext ctx)
@@ -128,17 +147,6 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
         direction = 0;
-        playerSpeed = basePlayerSpeed;
-    }
-
-    private IEnumerator SprintTime()
-    {
-        float time = -1;
-        while (time < 0)
-        {
-            time += 5 * Time.deltaTime;
-            yield return null;
-        }
         playerSpeed = basePlayerSpeed;
     }
 

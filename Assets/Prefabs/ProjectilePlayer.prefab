@@ -175,4 +175,5 @@ MonoBehaviour:
   launchDirNorm: {x: 0, y: 0}
   speed: 10
   allEnnemies: []
-  distanceMin: 1000
+  distanceMin: 20
+  gameManager: {fileID: 0}

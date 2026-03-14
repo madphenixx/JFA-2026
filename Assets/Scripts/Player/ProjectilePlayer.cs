@@ -10,7 +10,7 @@ public class ProjectilePlayer : MonoBehaviour
     public Vector2 launchDirNorm;
     public float speed = 10;
     public GameObject[] allEnnemies;
-    public float distanceMin=1000;
+    public float distanceMin = 20;
     public GameManager gameManager;
 
 
@@ -34,8 +34,16 @@ public class ProjectilePlayer : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody2D>();
         
-        launchDir = cible.transform.position - gameObject.transform.position;
-        launchDirNorm = launchDir.normalized;
+        if (cible == null)
+        {
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            launchDir = cible.transform.position - gameObject.transform.position;
+            launchDirNorm = launchDir.normalized;
+        }
     }
 
     // Update is called once per frame

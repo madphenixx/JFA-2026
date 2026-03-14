@@ -1,0 +1,18 @@
+using UnityEngine;
+
+public class CameraGround : MonoBehaviour
+{
+    public GameObject player;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = new Vector3(player.transform.position.x + 6, 7, -10); 
+    }
+}
