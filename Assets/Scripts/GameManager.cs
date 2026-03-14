@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,21 +16,28 @@ public class GameManager : MonoBehaviour
     public float maxPv;
     public static int score;
     public static int combo;
+
+    // public List<GameObject> slots = new List<GameObject>();
+    // public List<GameObject> scoreAdd = new List<GameObject>();
+    // public int nextFreeSlot = 0;
+    // public int slotCount;
+    // public GameObject scoreAddPrefab;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        pvSlider = GameObject.Find("PVPlayer").GetComponent<Slider>();
+        pvSlider = GameObject.Find("PvPlayer").GetComponent<Slider>();
         scoreText = GameObject.Find("Score").GetComponent<Text>();
         comboText = GameObject.Find("Combo").GetComponent<Text>();
 
-        scoreTr = GameObject.Find("Score").transform;
+        // scoreTr = GameObject.Find("Score").transform;
 
         maxPv = 10;
         pv = 10;
         score = 0;
         combo = 0;
+        // slotCount = slots.Count;
     }
 
     // Update is called once per frame
@@ -49,37 +57,43 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ShowScoreAdd(float value, bool isPositive) // Pour afficher le montant ajouté ou enlevé du score
-    {
-        foreach (Transform child in scoreTr)
-        {
-            if (child.gameObject.activeSelf == false)
-            {
-                Text text = child.GetComponent<Text>();
-                
-                if (isPositive)
-                {
-                    text.text = "+" + value.ToString();
-                }
+    // public void DeleteScoreAdd(GameObject amount)
+    // {
+    //     scoreAdd.Remove(amount);
+    //     Destroy(scoreTr.GetChild(slotCount).gameObject);
+    //     nextFreeSlot = nextFreeSlot - 1;
+    // }
+        
+    // public void AddScoreAdd(float value, bool isPositive)
+    // {
+        
+    //     GameObject amount = Instantiate(scoreAddPrefab, scoreTr);
+    //     scoreAdd.Add(amount);
+    //     Text text = amount.GetComponent<Text>();
+            
+    //     if (isPositive)
+    //     {
+    //         text.text = "+" + value.ToString();
+    //     }
 
-                else
-                {
-                    text.text = "-" + value.ToString();
-                }
+    //     else
+    //     {
+    //         text.text = "-" + value.ToString();
+    //     }
 
-                text.gameObject.SetActive(true);
-                StartCoroutine(ScoreTime(text));
+    //     if (scoreAdd.Count > slotCount)
+    //     {
+    //         amount.GetComponent<RectTransform>().anchoredPosition = slots[nextFreeSlot].GetComponent<RectTransform>().anchoredPosition;
+    //         nextFreeSlot = nextFreeSlot + 1;
+    //         StartCoroutine(ScoreTime(amount));
+    //     }
+    // }
 
-               break; 
-            }
-        }
-    }
-
-    public IEnumerator ScoreTime(Text text)
-    {
-        yield return new WaitForSeconds(1);
-        text.gameObject.SetActive(false);
-    }
+    // public IEnumerator ScoreTime(GameObject amount)
+    // {
+    //     yield return new WaitForSeconds(1);
+    //     DeleteScoreAdd(amount);
+    // }
 
     public void SpawnBonus(Vector2 spawnPos) //On l'utilisera en mode "si le combat est terminé et que la scéne est la l°blabla, on faitt swpawn à cette position
     {

@@ -69,7 +69,7 @@ public class ProjectilePlayer : MonoBehaviour
             GameManager.comboText.text = "Combo: " + GameManager.combo.ToString();
 
             GameManager.score  =GameManager.score + 10 * produit;
-            gameManager.ShowScoreAdd(10 * produit, true);
+            // gameManager.AddScoreAdd(10 * produit, true);
             GameManager.scoreText.text = "Score: " + GameManager.score.ToString();
 
             Destroy(gameObject);

@@ -41,7 +41,7 @@ public class ProjectileEnnemi : MonoBehaviour
 
             GameManager.score = GameManager.score - 10;
             GameManager.scoreText.text = "Score: "+ GameManager.score.ToString();
-            gameManager.ShowScoreAdd(10, false);
+            // gameManager.AddScoreAdd(10, false);
 
             Destroy(gameObject);
         }
