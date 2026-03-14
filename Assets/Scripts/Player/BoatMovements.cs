@@ -4,11 +4,14 @@ using UnityEngine.InputSystem;
 public class BoatMovements : MonoBehaviour
 {
     public InputActionReference moveRef;
+
     public float playerSpeed;
     public Vector3 direction;
+
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     public Transform playerTransform;
+    
     public bool facingRight = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

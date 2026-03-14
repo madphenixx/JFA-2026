@@ -3,10 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 { 
+    public InputActionReference distanceRef;
+
     public GameObject projectile;
+    
     public float speed = 10;
     public Vector2 spawnPos;
-    public InputActionReference distanceRef;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

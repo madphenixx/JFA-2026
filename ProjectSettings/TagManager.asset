@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ennemi
   - Ground
+  - Bonus
   layers:
   - Default
   - TransparentFX

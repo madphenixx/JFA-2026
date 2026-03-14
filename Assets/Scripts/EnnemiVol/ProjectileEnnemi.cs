@@ -4,10 +4,12 @@ public class ProjectileEnnemi : MonoBehaviour
 {   
     public GameObject cible;
     public Rigidbody2D rb;
+    // public Animator enemyAnimator;
+
     public Vector2 launchDir;
     public Vector2 launchDirNorm;
     public float speed;
-    // public Animator enemyAnimator;
+
     public GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created 

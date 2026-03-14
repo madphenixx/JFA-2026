@@ -4,8 +4,9 @@ using System.Collections;
 public class EnnemiVol : MonoBehaviour
 {
     public GameObject projectile;
-    public Vector2 spawnPos;
     public GameObject barreVie;
+    
+    public Vector2 spawnPos;
     public float spawnTime;
 
     void Start()

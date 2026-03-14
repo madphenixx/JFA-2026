@@ -6,11 +6,14 @@ public class ProjectilePlayer : MonoBehaviour
 {
     public GameObject cible;
     public Rigidbody2D rb;
+    
     public Vector2 launchDir;
     public Vector2 launchDirNorm;
     public float speed = 10;
+
     public GameObject[] allEnnemies;
     public float distanceMin = 20;
+
     public GameManager gameManager;
 
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,16 +8,19 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference jumpRef;
     public InputActionReference sprintRef;
     public InputActionReference dodgeRef;
+
     public float playerSpeed;
     public float basePlayerSpeed;
     public float jumpForce = 10;
     public float direction;
     public float sprintSpeed = 4f;
     public float dodgeSpeed = 8f;
+
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     // public Animator playerAnimator;
     public Transform playerTransform;
+    
     public bool facingRight = true;
     public bool isGrounded;
 
@@ -86,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if(ctx.started && isGrounded)
+        if (ctx.started && isGrounded)
         {
             // playerAnimator.SetTrigger("JumpUp");
             isGrounded = false;
@@ -141,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator DodgeTime()
     {
         direction = -1;
-        while(direction < 0)
+        while (direction < 0)
         {
             direction += 5 * Time.deltaTime;
             yield return null;
