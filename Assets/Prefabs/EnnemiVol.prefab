@@ -287,7 +287,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 7440feb8392095e4f82f0c0b769f6d5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a09a794ea97e1b429eee7869dda4363, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -373,9 +373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnnemiVol
   projectile: {fileID: 4002874529014856564, guid: 06aedb8aa981df1448bbd40ec08ef804, type: 3}
-  speed: 10
-  SpawnPos: {x: 0, y: 0}
   barreVie: {fileID: 0}
+  spawnPos: {x: 0, y: 0}
   spawnTime: 3.5
 --- !u!114 &2458197397254317592
 MonoBehaviour:
